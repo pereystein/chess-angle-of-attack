@@ -3,6 +3,7 @@ import styles from './ChessBoard.module.css';
 import mateInTwo from "./mateInTwo";
 import moves from "./moves";
 import {Move} from "./Move";
+import Row from "./Row";
 
 interface ChessBoardProps {}
 
@@ -84,12 +85,12 @@ class ChessBoard extends React.Component {
         }
         let rays = moves[piece];
 
-        console.log(moves, piece)
         rays.forEach((ray: Move[]) => {
             let blocked = false;
             ray.forEach((move) => {
                 let x = i + move.x;
                 let y = j + move.y;
+
                 if (isValid(x,y) && !blocked) {
                     shading[x][y] = shading[x][y] + 1;
                     blocked = blocked || isBlocked(x,y);
@@ -102,7 +103,16 @@ class ChessBoard extends React.Component {
         this.initialize();
         return (
             <div className={styles.ChessBoard}>
-                ChessBoard Component
+                <div className="board">
+                    <Row x={0} row={this.board[0]} white={this.white[0]} black={this.black[0]}></Row>
+                    <Row x={1} row={this.board[1]} white={this.white[1]} black={this.black[1]}></Row>
+                    <Row x={2} row={this.board[2]} white={this.white[2]} black={this.black[2]}></Row>
+                    <Row x={3} row={this.board[3]} white={this.white[3]} black={this.black[3]}></Row>
+                    <Row x={4} row={this.board[4]} white={this.white[4]} black={this.black[4]}></Row>
+                    <Row x={5} row={this.board[5]} white={this.white[5]} black={this.black[5]}></Row>
+                    <Row x={6} row={this.board[6]} white={this.white[6]} black={this.black[6]}></Row>
+                    <Row x={7} row={this.board[7]} white={this.white[7]} black={this.black[7]}></Row>
+                </div>
             </div>
         )
     }
