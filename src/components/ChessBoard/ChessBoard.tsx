@@ -53,9 +53,9 @@ class ChessBoard extends React.Component {
                 for (let j = 0; j < 8; j++) {
                     let piece = this.board[i][j];
                     if (piece === piece.toUpperCase()) {
-                        this.tracePiece(i, j, piece, this.board, this.black);
-                    } else {
                         this.tracePiece(i, j, piece, this.board, this.white);
+                    } else {
+                        this.tracePiece(i, j, piece, this.board, this.black);
                     }
                 }
             }
