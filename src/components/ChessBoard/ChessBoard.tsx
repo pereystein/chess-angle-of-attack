@@ -13,7 +13,7 @@ class ChessBoard extends React.Component {
     white:number[][] = [[], [], [], [], [], [], [], []];
     black:number[][] = [[], [], [], [], [], [], [], []];
 
-    componentDidMount() {
+    initialize() {
         for (let i = 0; i < 8; i++) {
             for (let j = 0; j < 8; j++) {
                 this.board[i][j] = ' ';
@@ -99,6 +99,7 @@ class ChessBoard extends React.Component {
     }
 
     render() {
+        this.initialize();
         return (
             <div className={styles.ChessBoard}>
                 ChessBoard Component
