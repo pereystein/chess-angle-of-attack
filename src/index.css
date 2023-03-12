@@ -11,3 +11,96 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.board {
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.piece {
+  position: absolute;
+  padding-left: 25px;
+  font-size: 80px;
+}
+
+.piece.white {
+  color: blue;
+}
+
+.piece.black {
+  color: red;
+}
+
+.square {
+  width: 100px;
+  height: 100px;
+}
+
+.square.odd .shading{
+  border-left: 50px solid saddlebrown;
+  border-right: 50px solid saddlebrown;
+}
+
+.square.even .shading{
+  border-left: 50px solid bisque;
+  border-right: 50px solid bisque;
+}
+
+.square.odd .shading.white0 {
+  border-bottom: 50px solid saddlebrown;
+}
+
+.square.even .shading.white0 {
+  border-bottom: 50px solid bisque;
+}
+
+.shading.white1 {
+  border-bottom: 50px solid rgba(0, 0, 255, 0.2);
+}
+
+.shading.white2 {
+  border-bottom: 50px solid rgba(0, 0, 255, 0.4);
+}
+
+.shading.white3 {
+  border-bottom: 50px solid rgba(0, 0, 255, 0.6);
+}
+
+.shading.white4 {
+  border-bottom: 50px solid rgba(0, 0, 255, 0.8);
+}
+
+.shading.white5 {
+  border-bottom: 50px solid rgba(0, 0, 255, 1);
+}
+
+.square.odd .shading.black0 {
+  border-top: 50px solid saddlebrown;
+}
+
+.square.even .shading.black0 {
+  border-top: 50px solid bisque;
+}
+
+.shading.black1 {
+  border-top: 50px solid rgba(255, 0, 0, 0.2);
+}
+
+.shading.black2 {
+  border-top: 50px solid rgba(255, 0, 0, 0.4);
+}
+
+.shading.black3 {
+  border-top: 50px solid rgba(255, 0, 0, 0.6);
+}
+
+.shading.black4 {
+  border-top: 50px solid rgba(255, 0, 0, 0.8);
+}
+
+.shading.black5 {
+  border-top: 50px solid rgba(255, 0, 0, 1);
+}
