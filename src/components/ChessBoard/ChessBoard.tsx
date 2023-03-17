@@ -13,6 +13,7 @@ class ChessBoard extends React.Component {
     board:string[][] = [[], [], [], [], [], [], [], []];
     white:number[][] = [[], [], [], [], [], [], [], []];
     black:number[][] = [[], [], [], [], [], [], [], []];
+    attack:string[][] = [[], [], [], [], [], [], [], []];
 
     initialize() {
         for (let i = 0; i < 8; i++) {
@@ -20,6 +21,7 @@ class ChessBoard extends React.Component {
                 this.board[i][j] = ' ';
                 this.white[i][j] = 0;
                 this.black[i][j] = 0;
+                this.attack[i][j] = '';
             }
         }
 
@@ -54,16 +56,16 @@ class ChessBoard extends React.Component {
                 for (let j = 0; j < 8; j++) {
                     let piece = this.board[i][j];
                     if (piece === piece.toUpperCase()) {
-                        this.tracePiece(i, j, piece, this.board, this.white);
+                        this.tracePiece(i, j, piece, this.board, this.white, this.attack);
                     } else {
-                        this.tracePiece(i, j, piece, this.board, this.black);
+                        this.tracePiece(i, j, piece, this.board, this.black, this.attack);
                     }
                 }
             }
         }
     }
 
-    private tracePiece(i: number, j: number, piece: string, board: string[][], shading: number[][]) {
+    private tracePiece(i: number, j: number, piece: string, board: string[][], shading: number[][], attack: string[][]) {
         function isValid(x: number, y: number) {
             if (0 <= x && x <= 7 &&
                 0 <= y && y <= 7)
@@ -84,6 +86,7 @@ class ChessBoard extends React.Component {
             return;
         }
         let rays = moves[piece];
+        let originSquare = '' + i + j;
 
         rays.forEach((ray: Move[]) => {
             let blocked = false;
@@ -92,26 +95,33 @@ class ChessBoard extends React.Component {
                 let y = j + move.y;
 
                 if (isValid(x,y) && !blocked) {
-                    shading[x][y] = shading[x][y] + 1;
+                    shading[x][y] += 1;
+                    attack[x][y] += ' ' + originSquare;
+
                     blocked = blocked || isBlocked(x,y);
                 }
             });
         });
+        this.forceUpdate();
+    }
+
+    componentDidMount() {
+        this.initialize();
     }
 
     render() {
-        this.initialize();
         return (
             <div className={styles.ChessBoard}>
+                <a onClick={this.initialize.bind(this)}>New puzzle</a>
                 <div className="board">
-                    <Row x={0} row={this.board[0]} white={this.white[0]} black={this.black[0]}></Row>
-                    <Row x={1} row={this.board[1]} white={this.white[1]} black={this.black[1]}></Row>
-                    <Row x={2} row={this.board[2]} white={this.white[2]} black={this.black[2]}></Row>
-                    <Row x={3} row={this.board[3]} white={this.white[3]} black={this.black[3]}></Row>
-                    <Row x={4} row={this.board[4]} white={this.white[4]} black={this.black[4]}></Row>
-                    <Row x={5} row={this.board[5]} white={this.white[5]} black={this.black[5]}></Row>
-                    <Row x={6} row={this.board[6]} white={this.white[6]} black={this.black[6]}></Row>
-                    <Row x={7} row={this.board[7]} white={this.white[7]} black={this.black[7]}></Row>
+                    <Row x={0} row={this.board[0]} white={this.white[0]} black={this.black[0]} attack={this.attack[0]}></Row>
+                    <Row x={1} row={this.board[1]} white={this.white[1]} black={this.black[1]} attack={this.attack[1]}></Row>
+                    <Row x={2} row={this.board[2]} white={this.white[2]} black={this.black[2]} attack={this.attack[2]}></Row>
+                    <Row x={3} row={this.board[3]} white={this.white[3]} black={this.black[3]} attack={this.attack[3]}></Row>
+                    <Row x={4} row={this.board[4]} white={this.white[4]} black={this.black[4]} attack={this.attack[4]}></Row>
+                    <Row x={5} row={this.board[5]} white={this.white[5]} black={this.black[5]} attack={this.attack[5]}></Row>
+                    <Row x={6} row={this.board[6]} white={this.white[6]} black={this.black[6]} attack={this.attack[6]}></Row>
+                    <Row x={7} row={this.board[7]} white={this.white[7]} black={this.black[7]} attack={this.attack[7]}></Row>
                 </div>
             </div>
         )
