@@ -86,7 +86,6 @@ class ChessBoard extends React.Component {
             return;
         }
         let rays = moves[piece];
-        let originSquare = '' + i + j;
 
         rays.forEach((ray: Move[]) => {
             let blocked = false;
@@ -96,7 +95,7 @@ class ChessBoard extends React.Component {
 
                 if (isValid(x,y) && !blocked) {
                     shading[x][y] += 1;
-                    attack[x][y] += ' ' + originSquare;
+                    attack[i][j] += ' ' + x + y;
 
                     blocked = blocked || isBlocked(x,y);
                 }
